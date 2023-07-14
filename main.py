@@ -1,8 +1,6 @@
 import sys
-import math
 import re
-from functools import partial
-from PySide2.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QPushButton
+from PySide2.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QLabel, QLineEdit, QPushButton
 from PySide2.QtCore import Qt
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
@@ -107,7 +105,7 @@ class FunctionPlotter(QMainWindow):
             x = x_min
             while x <= x_max:
                 x_values.append(x)
-                y_values.append(eval(function))
+                y_values.append(eval(function.replace('^', '**')))
                 x += 0.1
 
             self.figure.clear()
@@ -127,4 +125,3 @@ if __name__ == "__main__":
     window = FunctionPlotter()
     window.show()
     sys.exit(app.exec_())
-        
